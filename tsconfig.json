@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "ignoreDeprecations": "6.0",
+    "target": "ES2020",
+    "module": "node16",
     "lib": ["dom", "es6", "es2017"],
     "sourceMap": true,
     "outDir": "./dist",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "declaration": false,
-
     "composite": false,
     "removeComments": true,
     "noImplicitAny": true,
@@ -27,5 +27,5 @@
     "rootDir": "src"
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "src/types"]
 }

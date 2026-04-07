@@ -19,7 +19,7 @@ export class User extends BaseEntity {
   @Field()
   @Column("text", { unique: true })
   email!: string;
-  //
+
   // @Field()
   // name!: string;
 

@@ -3,6 +3,8 @@ import {
   Query,
   Mutation,
   Arg,
+  Authorized,
+  UseMiddleware,
   // FieldResolver,
   // Root,
 } from "type-graphql";
@@ -10,18 +12,18 @@ import bcrypt from "bcryptjs";
 
 import { User } from "../../entities/user.entity";
 import { RegisterInput } from "../../types/user.input";
+import { isAuth } from "../../middleware/isAuth.middleware";
+import { sendEmail } from "../../utils/email";
+import { verifyURL } from "../../utils/verificationURL";
 
 @Resolver()
 export class RegisterResolver {
+  @Authorized()
+  @UseMiddleware(isAuth)
   @Query(() => String)
   async hello() {
     return "Hello World!";
   }
-
-  // @FieldResolver(() => String)
-  // async name(@Root() parent: User) {
-  //   return `${parent.firstName} ${parent.lastName}`;
-  // }
 
   @Mutation(() => User)
   async register(
@@ -36,6 +38,13 @@ export class RegisterResolver {
       password: hashedPassword,
     });
     await user.save();
+
+    await sendEmail(email, await verifyURL(user.id));
     return user;
   }
+
+  // // @FieldResolver(() => String)
+  // // async name(@Root() parent: User) {
+  // //   return `${parent.firstName} ${parent.lastName}`;
+  // // }
 }

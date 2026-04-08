@@ -14,6 +14,13 @@ export const createApp = async () => {
   const schema = await buildSchema({
     resolvers,
     validate: true,
+    authChecker: ({ context: { req } }) => {
+      // if (req.session.userId) {
+      //   return true;
+      // }
+      // return false;
+      return !!req.session.userId;
+    },
   });
 
   const apolloServer = new ApolloServer({

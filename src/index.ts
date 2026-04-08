@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { AppDataSource } from "./config/data-source";
 import { createApp } from "./app";
 import { config } from "./config/env";
-// import "./types/express-session";
 
 const main = async () => {
   const port = config.Port;

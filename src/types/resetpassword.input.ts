@@ -1,7 +1,8 @@
+import { PasswordMixin } from "src/mixins/password.mixin";
 import { Field, InputType } from "type-graphql";
 
 @InputType()
-export class ResetPasswordInput {
+export class ResetPasswordInput extends PasswordMixin(class {}) {
   @Field()
   token!: string;
 

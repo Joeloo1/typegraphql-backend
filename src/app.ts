@@ -4,9 +4,10 @@ import { buildSchema } from "type-graphql";
 import connectRedis from "connect-redis";
 import { altairExpress } from "altair-express-middleware";
 import cors from "cors";
+import session from "express-session";
+
 import { resolvers } from "./resolvers/index";
 import { formatError } from "./utils/formatError";
-import session from "express-session";
 import { redis } from "./config/redis";
 import { config } from "./config/env";
 
@@ -26,7 +27,7 @@ export const createApp = async () => {
   const apolloServer = new ApolloServer({
     schema,
     formatError,
-    context: ({ req }) => ({ req }),
+    context: ({ req, res }) => ({ req, res }),
   });
 
   await apolloServer.start();
@@ -38,7 +39,7 @@ export const createApp = async () => {
     "/altair",
     altairExpress({
       endpointURL: "/graphql",
-      baseURL: "/altair/", // ← add this
+      baseURL: "/altair/",
     }),
   );
 

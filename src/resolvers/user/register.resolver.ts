@@ -11,7 +11,7 @@ import {
 import bcrypt from "bcryptjs";
 
 import { User } from "../../entities/user.entity";
-import { RegisterInput } from "../../types/user.input";
+import { RegisterInput } from "../../types/register.input";
 import { isAuth } from "../../middleware/isAuth.middleware";
 import { sendEmail } from "../../utils/email";
 import { verifyURL } from "../../utils/verificationURL";

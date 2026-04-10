@@ -72,8 +72,6 @@ export const createApp = async () => {
       },
     }),
   );
-  redis.on("connect", () => console.log("Redis connected"));
-  redis.on("error", (err) => console.error("Redis error:", err));
 
   apolloServer.applyMiddleware({ app, cors: false });
 
